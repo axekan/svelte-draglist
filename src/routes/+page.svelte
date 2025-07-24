@@ -11,7 +11,7 @@
 		status: TaskStatus;
 	}
 
-	let items: TaskItem[] = [
+	let items: TaskItem[] = $state([
 		{ id: '1', label: 'Organize a team-building event', status: 'TODO' },
 		{ id: '2', label: 'Create and maintain office inventory', status: 'IN PROGRESS' },
 		{ id: '3', label: 'Update company website content', status: 'DONE' },
@@ -20,7 +20,7 @@
 		{ id: '6', label: 'Manage facility maintenance', status: 'DONE' },
 		{ id: '7', label: 'Organize customer feedback surveys', status: 'TODO' },
 		{ id: '8', label: 'Coordinate travel arrangements', status: 'IN PROGRESS' },
-	];
+	]);
 </script>
 
 <div class="container" style="margin: auto;">
