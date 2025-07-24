@@ -1,36 +1,62 @@
 <script lang="ts">
-	import DragHandle from "$lib/DragHandle.svelte";
 	import DragItem from "$lib/DragItem.svelte";
 	import DragList from "$lib/DragList.svelte";
+	import Task from "./Task.svelte";
+	import type { DraggableItem } from "$lib/ctx.js";
 
-    let items = [
-        { id: '1', content: 'Item 1' },
-        { id: '2', content: 'Item 2' },
-        { id: '3', content: 'Item 3' },
-    ];
+	type TaskStatus = 'TODO' | 'IN PROGRESS' | 'DONE';
+	
+	interface TaskItem extends DraggableItem {
+		label: string;
+		status: TaskStatus;
+	}
+
+	let items: TaskItem[] = [
+		{ id: '1', label: 'Organize a team-building event', status: 'TODO' },
+		{ id: '2', label: 'Create and maintain office inventory', status: 'IN PROGRESS' },
+		{ id: '3', label: 'Update company website content', status: 'DONE' },
+		{ id: '4', label: 'Plan and execute marketing campaigns', status: 'TODO' },
+		{ id: '5', label: 'Coordinate employee training sessions', status: 'DONE' },
+		{ id: '6', label: 'Manage facility maintenance', status: 'DONE' },
+		{ id: '7', label: 'Organize customer feedback surveys', status: 'TODO' },
+		{ id: '8', label: 'Coordinate travel arrangements', status: 'IN PROGRESS' },
+	];
 </script>
 
-<h1>Svelte draglist</h1>
+<div class="container" style="margin: auto;">
+    <h1>Svelte DragList demo</h1>
+    <p>Drag and drop tasks to reorder them.</p>
+    <div class="list-wrapper">
+        <DragList {items} onReorder={(newItems) => items = newItems} gap="8px">
+            <DragItem>
+                {#snippet children(item)}
+                    <Task label={item.label} status={item.status} />
+                {/snippet}
+            </DragItem>
+        </DragList>
+    </div>
+</div>
 
-<DragList {items} onReorder={(newItems) => items = newItems} gap="8px">
-    <DragItem>
-        {#snippet children(item)}
-            <div class="drag-item">
-                <DragHandle />
-                {item.content}
-            </div>
-        {/snippet}
-    </DragItem>
-</DragList>
 
 <style>
-    .drag-item {
-        height: 40px;
-        padding-left: 8px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        border: 1px solid black;
-        background-color: white;
+    .container {
+        width: min(420px, 100%);
+        overflow: hidden;
+    }
+
+    h1 {
+        margin-bottom: 0;
+    }
+
+    .list-wrapper {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 8px;
+    }
+
+    :global(body) {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        background-color: #f3f4f6;
+        color: #111827;
     }
 </style>
