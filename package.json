@@ -1,6 +1,7 @@
 {
 	"name": "svelte-draglist",
 	"version": "0.0.1",
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
@@ -34,6 +35,14 @@
 	"peerDependencies": {
 		"svelte": "^5.0.0"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/axekan/svelte-draglist.git"
+	},
+	"bugs": {
+		"url": "https://github.com/axekan/svelte-draglist/issues"
+	},
+	"author": "Axekan <axekan@live.se> (https://axekan.com)",
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
