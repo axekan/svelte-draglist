@@ -59,4 +59,8 @@
         background-color: #f3f4f6;
         color: #111827;
     }
+
+    :global(*, :before, :after) {
+        box-sizing: border-box;
+    }
 </style>
