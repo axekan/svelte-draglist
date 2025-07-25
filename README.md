@@ -4,6 +4,8 @@ This is a lightweight implementation of drag and drop for Svelte 5 using the [Pr
 
 ## [See live demo](https://axekan.github.io/svelte-draglist/)
 
+![draglist_demo](https://github.com/user-attachments/assets/1171973f-0b7d-4f8f-a6b2-1e719f49871f)
+
 ## Usage
 
 ```svelte
