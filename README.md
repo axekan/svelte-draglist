@@ -1,58 +1,70 @@
-# Svelte library
+# Svelte draglist
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+This is a lightweight implementation of drag and drop for Svelte 5 using the [Pragmatic drag and drop library](https://atlassian.design/components/pragmatic-drag-and-drop/about). It supports simple vertical lists with minimal configuration. The library relies on browser drag and drop behavior, and as such works well on both desktop and mobile. 
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## [See live demo](https://axekan.github.io/svelte-draglist/)
 
-## Creating a project
+## Usage
 
-If you're seeing this, you've probably already done this step. Congrats!
+```svelte
+<script>
+    import { DragList, DragItem } from "svelte-draglist";
+    
+    let items = $state([
+        {id: '1', name: "item1"},
+        {id: '2', name: "item2"},
+        {id: '3', name: "item3"},
+        {id: '4', name: "item4"}
+    ]);
+</script>
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+<DragList {items} onReorder={(newItems) => items = newItems}>
+    <Dragitem>
+        {#snippet children(item)}
+            <div>{item.name}</div>
+        {/snippet}
+    </DragItem>
+</DragList>
 ```
 
-## Developing
+## Options
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### items (required)
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```ts
+items: Array<DraggableItem>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+A list of items to render in the list. Items in the list can be an object of any shape, but must have an `id` property with a string value.
 
-## Building
+The list of items uses the type `DraggableItem`:
 
-To build your library:
-
-```bash
-npm run package
+```ts
+interface DraggableItem extends Record<string | symbol, unknown> {
+	id: string;
+}
 ```
 
-To create a production version of your showcase app:
+### onReorder
 
-```bash
-npm run build
+```ts
+onReorder?: (items: Array<T>) => void
 ```
 
-You can preview the production build with `npm run preview`.
+A callback when the order changes through dragging. The function is called with the list of items in the updated order. Can be used to persist the changes or run custom logic.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### gap
 
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
+```ts
+gap?: string
 ```
+
+A gap between list items in a css value. Default: `8px`.
+
+### class
+
+```ts
+class?: string
+```
+Optional css classes to add to the draglist container.
+
