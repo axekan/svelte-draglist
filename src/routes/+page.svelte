@@ -23,6 +23,10 @@
 	]);
 </script>
 
+<svelte:head>
+    <title>Svelte DragList Demo</title>
+</svelte:head>
+
 <div class="container" style="margin: auto;">
     <h1>Svelte DragList demo</h1>
     <p>Drag and drop tasks to reorder them.</p>
